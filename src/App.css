@@ -3,14 +3,20 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  width: 350px;
+  height: auto;
+  /* height: 40vmin; */
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.fetchButton { 
+  box-sizing: border-box;
+  padding: 5px; 
+  height: 50px;
+  width: 350px;
+  font-size:x-large;
+  margin-top: 20px;
+  font-weight:bolder;
 }
 
 .App-header {
@@ -22,17 +28,4 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

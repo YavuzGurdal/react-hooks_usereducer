@@ -1,5 +1,5 @@
 import './App.css';
-import { useReducer, useState, useEffect } from "react";
+import { useReducer } from "react";
 import axios from "axios";
 import { reducer } from './reducer';
 
@@ -11,7 +11,7 @@ const initialState = {
 
 function App() {
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState); // birinci parametre reducer, ikinci parametre state 
   const { data, loading, error } = state; // destructring
 
   const fetchDogPhoto = () => {
@@ -21,8 +21,10 @@ function App() {
     axios
       .get("https://dog.ceo/api/breeds/image/random")
       .then((res) => {
-        dispatch({ type: "FETCH_SUCCESS", payload: res.message }); // kopek resmi res icinde message seklinde idi. 
-        // onu aldik ve payload atadik. yani artik payload aldigimiz data daki kopek resmi
+        //console.log(res)
+        dispatch({ type: "FETCH_SUCCESS", payload: res.data.message }); // kopek resmi res.data icinde message seklinde idi. 
+        // onu aldik ve payload'a atadik. yani artik payload aldigimiz data daki kopek resmi
+        // payload bir object{} oldugu icin icine herseyi koyabiliriz
       })
       .catch(() => {
         dispatch({ type: "FETCH_ERROR", payload: "Error fetching data" }); // error oldugunda burdan gonderdigimiz mesaj cikacak. 
@@ -33,29 +35,18 @@ function App() {
 
   return (
     <div className="App">
-      {/* <header className="App-header"> */}
-      {
-        data && (
-          <img src={data} className="App-logo" alt="Random Dog" />
-        )
-      }
+      <header className="App-header">
+        {
+          data && (
+            <img src={data} className="App-logo" alt="Random Dog" />
+          )
+        }
 
-      {error && <p>{error}</p>}
+        {error && <p>{error}</p>}
 
-      <button onClick={fetchDogPhoto} disabled={loading}></button>
+        <button className="fetchButton" onClick={fetchDogPhoto} disabled={loading}>Fetch Dog Photo</button>
 
-      {/* <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a> 
-      </header>*/}
+      </header>
     </div>
   );
 }
