@@ -12,7 +12,7 @@ const initialState = {
 function App() {
 
   const [state, dispatch] = useReducer(reducer, initialState); // birinci parametre reducer, ikinci parametre state 
-  const { data, loading, error } = state; // destructring
+  const { data, loading, error } = state; // destructuring
 
   const fetchDogPhoto = () => {
 
